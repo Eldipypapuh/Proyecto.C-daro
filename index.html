@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manos a la Obra</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f7fb;
+            padding-top: 120px;
+            color: #0f172a;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ===== HEADER (esto ya lo tenian armado) ===== */
+        .header-principal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .barra-superior {
+            background-color: rgb(0, 21, 53);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icono {
+            font-size: 28px;
+        }
+
+        .logo-texto {
+            line-height: 1.1;
+        }
+
+        .logo-texto strong {
+            display: block;
+            font-size: 17px;
+        }
+
+        .logo-texto span {
+            display: block;
+            font-size: 12px;
+            color: #22c7b8;
+            font-weight: bold;
+        }
+
+        .buscador {
+            flex: 1;
+            max-width: 650px;
+            display: flex;
+        }
+
+        .buscador input {
+            flex: 1;
+            padding: 14px 18px;
+            border: none;
+            outline: none;
+            border-radius: 12px 0 0 12px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .buscador button {
+            border: none;
+            background: #22c7b8;
+            color: white;
+            padding: 0 18px;
+            border-radius: 0 12px 12px 0;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .acciones {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .link-ingresar {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .btn-publicar {
+            background: #22c7b8;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-publicar:hover {
+            transform: translateY(-2px);
+        }
+
+        .barra-menu {
+            background: white;
+            padding: 12px 28px;
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .barra-menu a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            padding-bottom: 8px;
+            position: relative;
+        }
+
+        .barra-menu a.activo {
+            color: #0f172a;
+        }
+
+        .barra-menu a.activo::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background: #22c7b8;
+            border-radius: 20px;
+        }
+
+        /* ===== BOTONES REUTILIZABLES =====
+   .boton es la base, y despues se combina con
+   .boton-lleno (verde, relleno) o .boton-borde (blanco, con borde) */
+        .boton {
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #22c7b8;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .boton-lleno {
+            background: #22c7b8;
+            color: white;
+        }
+
+        .boton-borde {
+            background: white;
+            color: #0f172a;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: #e9edf5;
+            padding: 50px 0;
+        }
+
+        .hero .contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-texto {
+            max-width: 600px;
+        }
+
+        .hero-texto h1 {
+            font-size: 38px;
+            margin: 0 0 15px 0;
+        }
+
+        .hero-texto p {
+            font-size: 17px;
+            color: #4b5563;
+            margin-bottom: 25px;
+        }
+
+        .hero-botones {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* ===== TITULOS DE SECCION ===== */
+        .seccion {
+            padding: 45px 0;
+        }
+
+        .seccion-titulo {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== OFICIOS MAS BUSCADOS ===== */
+        .oficios-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+        }
+
+        .oficio-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .oficio-card .icono {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .oficio-card p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* ===== PROFESIONALES DESTACADOS ===== */
+        .profesionales-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .profesional-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            display: flex;
+            gap: 15px;
+        }
+
+        .profesional-avatar {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 50%;
+            background: #001535;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .profesional-info h3 {
+            margin: 0 0 3px 0;
+            font-size: 17px;
+        }
+
+        .profesional-info .oficio {
+            color: #22c7b8;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0 0 8px 0;
+        }
+
+        .profesional-info .valoracion {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0 0 4px 0;
+        }
+
+        .profesional-info .ubicacion {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0 0 12px 0;
+        }
+
+        .profesional-info .boton {
+            padding: 8px 16px;
+            font-size: 14px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px) {
+            body {
+                padding-top: 170px;
+            }
+
+            .barra-superior {
+                flex-wrap: wrap;
+            }
+
+            .buscador {
+                width: 100%;
+                max-width: none;
+                order: 3;
+            }
+
+            .barra-menu {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .oficios-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .profesionales-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header-principal">
+        <div class="barra-superior">
+            <a href="#" class="logo">
+                <span class="logo-icono">🏠</span>
+                <span class="logo-texto"><strong>Manos</strong><span>a la Obra</span></span>
+            </a>
+            <div class="buscador">
+                <input type="text" placeholder="Buscar oficio...">
+                <button>🔍</button>
+            </div>
+            <div class="acciones">
+                <a href="#" class="link-ingresar">Ingresar</a>
+                <a href="#" class="btn-publicar">Publicar servicio</a>
+            </div>
+        </div>
+        <nav class="barra-menu">
+            <a href="#" class="activo">Inicio</a>
+            <a href="#">Oficios</a>
+            <a href="#">Profesionales</a>
+            <a href="#">Cómo funciona</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="contenedor">
+            <div class="hero-texto">
+                <h1>Encontrá al profesional que necesitás</h1>
+                <p>Conectamos clientes con trabajadores de confianza en todos los oficios.</p>
+                <div class="hero-botones">
+                    <a href="#" class="boton boton-lleno">Buscar profesionales</a>
+                    <a href="#" class="boton boton-borde">Publicar servicio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OFICIOS MAS BUSCADOS ===== -->
+    <section class="seccion">
+        <div class="contenedor">
+            <h2 class="seccion-titulo">Oficios más buscados</h2>
+            <div class="oficios-grid">
+                <div class="oficio-card"><span class="icono">⚡</span>
+                    <p>Electricista</p>
+                </div>
+                <div class="oficio-card"><span class="icono">🔥</span>
+                    <p>Gasista</p>
+                </div>
+                <div class="oficio-card"><span class="icono">🚰</span>
+                    <p>Plomero</p>
+                </div>
+                <div class="oficio-card"><span class="icono">🎨</span>
+                    <p>Pintor</p>
+                </div>
+                <div class="oficio-card"><span class="icono">🔨</span>
+                    <p>Carpintero</p>
+                </div>
+                <div class="oficio-card"><span class="icono">🧱</span>
+                    <p>Albañil</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROFESIONALES DESTACADOS ===== -->
+    <section class="seccion">
+        <div class="contenedor">
+            <h2 class="seccion-titulo">Profesionales destacados</h2>
+            <div class="profesionales-grid">
+
+                <div class="profesional-card">
+                    <div class="profesional-avatar">LG</div>
+                    <div class="profesional-info">
+                        <h3>Luis Gómez</h3>
+                        <p class="oficio">Electricista</p>
+                        <p class="valoracion">⭐ 4.6 (23 reseñas)</p>
+                        <p class="ubicacion">📍 Rosario, Santa Fe</p>
+                        <a href="#" class="boton boton-borde">Ver perfil</a>
+                    </div>
+                </div>
+
+                <div class="profesional-card">
+                    <div class="profesional-avatar">MD</div>
+                    <div class="profesional-info">
+                        <h3>Marcos Díaz</h3>
+                        <p class="oficio">Gasista</p>
+                        <p class="valoracion">⭐ 4.7 (18 reseñas)</p>
+                        <p class="ubicacion">📍 Villa Gobernador Gálvez</p>
+                        <a href="#" class="boton boton-borde">Ver perfil</a>
+                    </div>
+                </div>
+
+                <div class="profesional-card">
+                    <div class="profesional-avatar">JP</div>
+                    <div class="profesional-info">
+                        <h3>Javier Pereyra</h3>
+                        <p class="oficio">Pintor</p>
+                        <p class="valoracion">⭐ 4.5 (15 reseñas)</p>
+                        <p class="ubicacion">📍 Rosario, Santa Fe</p>
+                        <a href="#" class="boton boton-borde">Ver perfil</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
