@@ -24,7 +24,6 @@
             padding: 0 28px;
         }
 
-        /* ===== HEADER (esto ya lo tenian armado) ===== */
         .header-principal {
             position: fixed;
             top: 0;
@@ -118,11 +117,14 @@
             padding: 12px 20px;
             border-radius: 10px;
             font-weight: bold;
-            transition: 0.2s;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
         .btn-publicar:hover {
+            background-color: #ffffff;
+            color: black;
             transform: translateY(-2px);
+         
         }
 
         .barra-menu {
@@ -156,9 +158,6 @@
             border-radius: 20px;
         }
 
-        /* ===== BOTONES REUTILIZABLES =====
-   .boton es la base, y despues se combina con
-   .boton-lleno (verde, relleno) o .boton-borde (blanco, con borde) */
         .boton {
             padding: 14px 24px;
             border-radius: 10px;
@@ -180,7 +179,7 @@
             color: #0f172a;
         }
 
-        /* ===== HERO ===== */
+   
         .hero {
             background: #e9edf5;
             padding: 50px 0;
@@ -214,7 +213,7 @@
             gap: 15px;
         }
 
-        /* ===== TITULOS DE SECCION ===== */
+      
         .seccion {
             padding: 45px 0;
         }
@@ -224,7 +223,7 @@
             margin-bottom: 20px;
         }
 
-        /* ===== OFICIOS MAS BUSCADOS ===== */
+   
         .oficios-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -250,7 +249,7 @@
             font-weight: bold;
         }
 
-        /* ===== PROFESIONALES DESTACADOS ===== */
+        
         .profesionales-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -311,7 +310,7 @@
             text-align: center;
         }
 
-        /* ===== RESPONSIVE ===== */
+
         @media(max-width:900px) {
             body {
                 padding-top: 170px;
@@ -369,7 +368,7 @@
         </nav>
     </header>
 
-    <!-- ===== HERO ===== -->
+
     <section class="hero">
         <div class="contenedor">
             <div class="hero-texto">
@@ -383,7 +382,7 @@
         </div>
     </section>
 
-    <!-- ===== OFICIOS MAS BUSCADOS ===== -->
+
     <section class="seccion">
         <div class="contenedor">
             <h2 class="seccion-titulo">Oficios más buscados</h2>
@@ -410,7 +409,7 @@
         </div>
     </section>
 
-    <!-- ===== PROFESIONALES DESTACADOS ===== -->
+
     <section class="seccion">
         <div class="contenedor">
             <h2 class="seccion-titulo">Profesionales destacados</h2>
